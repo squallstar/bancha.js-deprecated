@@ -22,6 +22,7 @@ var bodyParser = require('body-parser');
 
 // framework libs
 var config = require('./libs/config').options();
+var database = require('./libs/database');
 
 var app = express();
 
