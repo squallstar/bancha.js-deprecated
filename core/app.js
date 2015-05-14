@@ -13,12 +13,14 @@ Application bootstrap file
 require("native-promise-only");
 
 // core libs
+var bodyParser = require('body-parser');
+var busboy = require('connect-busboy');
+var cookieParser = require('cookie-parser');
+var compression = require('compression');
 var express = require('express');
-var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+var path = require('path');
 
 // framework libs
 var config = require('./libs/config').options();
@@ -40,11 +42,14 @@ if(config.env === 'local') {
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 
-app.use(logger('dev'));
+app.use(compression());
+app.use(busboy());
+app.use(logger('[:date] :remote-addr :method :url :status :response-time ms - :res[content-length]'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public"), {maxage: '1h'}));
+app.disable('etag');
 
 // middlewares
 app.use('/', require('./libs/middlewares/install'));
