@@ -1,8 +1,14 @@
-h1 Install
+extends ../layout
 
-form(method='post')
-  .group
-    label(for='f-base_url') Base URL
-    input(id='f-base_url', type='text', placeholder='e.g. http://example.org', value=params.base_url, required)
+block content
 
-  input(type='submit', value='Install')
+  .container
+
+    h1 Install
+
+    form(method='post')
+      .input-field
+        input(id='f-base_url', class='validate', type='text', placeholder='e.g. http://example.org', value=params.base_url, required)
+        label(for='f-base_url') Base URL
+
+      button(type='submit', class='waves-effect waves-light btn') Install

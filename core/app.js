@@ -34,11 +34,10 @@ app.set('view engine', 'jade');
 app.locals.build = Math.round(Date.now()/1000);
 
 // pretty views on local
-if(config.env === 'local') {
+if(config.env === 'development') {
   app.locals.pretty = true;
   app.disable('view cache');
 }
-
 
 app.use(compression());
 app.use(busboy());
