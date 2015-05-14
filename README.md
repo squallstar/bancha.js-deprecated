@@ -2,7 +2,7 @@
 
 This is a port of [Bancha CMS](https://github.com/squallstar/bancha) for **Node.js**. Currently under development, not for use yet.
 
-# How to run the server
+# Basic usage
 
 ```
 npm install bancha --save
@@ -16,6 +16,8 @@ bancha().start(function () {
 });
 ```
 
+And then, just open your browser at [http://localhost](http://localhost) to finish the install.
+
 ## Default options
 
 Usage: `bancha(options).start(fn)`
@@ -23,9 +25,11 @@ Usage: `bancha(options).start(fn)`
 ```javascript
 bancha({
 
-  host: "localhost",
+  host: 'localhost',
 
   port: 80,
+
+  interface: '0.0.0.0',
 
   database: {
     // This can be any connection string supported by Sequelize

@@ -54,10 +54,18 @@ function checkInstall (req, res, next) {
 
 // Shows the install form
 function showInstall (req, res) {
-  var params = {};
+  var params = {
+    base_url: req.body.host || ( req.protocol + '://' + req.get('host') )
+  };
 
-  if (req.method === 'POST') {
-    params.host = req.body.host;
+  if (req.method === 'POST' && params.base_url) {
+    return Config.bulkCreate([
+      { key: INSTALL_KEY, value: '1' },
+      { key: 'base_url', value: params.base_url }
+    ]).then(function () {
+      isInstalled = true;
+      res.render('install/complete');
+    });
   }
 
   res.render('install/form', {
