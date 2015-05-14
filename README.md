@@ -1,6 +1,6 @@
 # Bancha.js
 
-## WIP
+This is a port of [Bancha CMS](https://github.com/squallstar/bancha) for **Node.js**. Currently under development, not for use yet.
 
 ```
 npm install bancha --save
