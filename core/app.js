@@ -39,8 +39,6 @@ if(config.env === 'local') {
   app.disable('view cache');
 }
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
 
 app.use(compression());
 app.use(busboy());
@@ -49,9 +47,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public"), {maxage: '1h'}));
+//app.use(favicon(__dirname + '/public/favicon.ico'));
 app.disable('etag');
 
-// middlewares
+// framework middle-wares
 app.use('/', require('./libs/middlewares/install'));
 
 // application routes

@@ -5,7 +5,9 @@ var database = require('../libs/database');
 var Config = database.define('config', {
   key: {
     type: Sequelize.STRING,
-    field: 'configKey'
+    field: 'configKey',
+    unique: true,
+    allowNull: false
   },
   value: {
     type: Sequelize.STRING,
