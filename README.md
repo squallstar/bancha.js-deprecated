@@ -2,6 +2,10 @@
 
 ## WIP
 
+```
+npm install bancha --save
+```
+
 ```javascript
 var bancha = require('bancha');
 
