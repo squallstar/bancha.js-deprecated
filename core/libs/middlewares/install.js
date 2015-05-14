@@ -6,7 +6,7 @@ Config.sync();
 
 module.exports = checkInstall;
 
-function checkInstall(req, res, next) {
+function checkInstall (req, res, next) {
   if (typeof isInstalled === 'undefined') {
     // Value needs to be loaded from database
   }
@@ -16,8 +16,20 @@ function checkInstall(req, res, next) {
   }
 
   if (!isInstalled) {
-    return res.redirect('/install');
+    return showInstall (req, res);
   }
 
   next();
+}
+
+function showInstall (req, res) {
+  var params = {};
+
+  if (req.method === 'POST') {
+    params.host = req.body.host;
+  }
+
+  res.render('install/form', {
+    params: params
+  });
 }
