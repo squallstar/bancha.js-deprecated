@@ -2,8 +2,8 @@
 
 ## WIP
 
-```
-var bancha = require('./index');
+```javascript
+var bancha = require('bancha');
 
 bancha({
   host: 'localhost'
