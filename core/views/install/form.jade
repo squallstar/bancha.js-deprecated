@@ -3,12 +3,26 @@ extends ../layout
 block content
 
   .container
+    .row
+      .col.s10.offset-s1
+        .card-panel.z-depth-2
+          .section
+            p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque suscipit orci ut faucibus tempus. In luctus diam lorem, nec porttitor ex tempus et.
 
-    h1 Install
+          .divider
 
-    form(method='post')
-      .input-field
-        input(id='f-base_url', class='validate', type='text', placeholder='e.g. http://example.org', value=params.base_url, required)
-        label(for='f-base_url') Base URL
+          .section
+            h5 Configure
+            p Lorem
 
-      button(type='submit', class='waves-effect waves-light btn') Install
+            form.row(method='post')
+              .input-field.col.s12
+                input(id='f_base_url', name='base_url', class='validate', type='text', placeholder='e.g. http://example.org', value=params.base_url, required)
+                label(for='f_base_url') Base URL
+              .input-field.col.s12
+                select(for='f_theme', name='theme')
+                  option(disabled, selected) Choose your theme
+                  option(value=1) Default
+                label(for='f_theme') Theme
+              .input-field.col.s12
+                button(type='submit', class='waves-effect waves-light btn') Install
