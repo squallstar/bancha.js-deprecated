@@ -23,6 +23,10 @@ var isInstalled;
 
 module.exports = checkInstall;
 
+module.exports.configureInstall = configureInstall;
+
+module.exports.isInstalled = checkIsInstalled;
+
 // Middle-ware function to check whether the application has been installed
 function checkInstall (req, res, next) {
   async.waterfall([
@@ -43,8 +47,8 @@ function checkInstall (req, res, next) {
       });
     },
     function () {
-      if (!isInstalled) {
-        return showInstall (req, res);
+      if (!isInstalled && req.originalUrl.indexOf('/install') === -1) {
+        return res.redirect('/admin/install');
       }
 
       next();
@@ -52,23 +56,16 @@ function checkInstall (req, res, next) {
   ]);
 }
 
-// Shows the install form
-function showInstall (req, res) {
-  var params = {
-    base_url: req.body.host || ( req.protocol + '://' + req.get('host') )
-  };
-
-  if (req.method === 'POST' && params.base_url) {
-    return Config.bulkCreate([
-      { key: INSTALL_KEY, value: '1' },
-      { key: 'base_url', value: params.base_url }
-    ]).then(function () {
-      isInstalled = true;
-      res.render('install/complete');
-    });
-  }
-
-  res.render('install/form', {
-    params: params
+function configureInstall (options, next) {
+  Config.bulkCreate([
+    { key: INSTALL_KEY, value: '1' },
+    { key: 'base_url', value: options.base_url }
+  ]).then(function () {
+    isInstalled = true;
+    next();
   });
+}
+
+function checkIsInstalled () {
+  return isInstalled;
 }

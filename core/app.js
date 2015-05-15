@@ -55,6 +55,9 @@ app.use('/', require('./libs/middlewares/install'));
 // application routes
 app.use('/', require('./routes/index'));
 
+// admin routes
+app.use('/admin/install', require('./routes/admin/install'));
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   var err = new Error('Not Found');
