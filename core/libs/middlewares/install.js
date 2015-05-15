@@ -11,9 +11,13 @@ Install middle-ware
 
 // Core libraries
 var async = require('async');
+var path = require('path');
 
 // Database models
 var Config = require('../../models/Config');
+
+// Framework libs
+var configOptions = require('../config').options();
 
 // Constants
 var INSTALL_KEY = 'is_installed';
@@ -48,7 +52,7 @@ function checkInstall (req, res, next) {
     },
     function () {
       if (!isInstalled && req.originalUrl.indexOf('/install') === -1) {
-        return res.redirect('/admin/install');
+        return res.redirect(path.join('/', configOptions.adminPath, 'install'));
       }
 
       next();

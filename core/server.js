@@ -17,7 +17,7 @@ module.exports = function Server (appConfiguration) {
    * Module dependencies.
    */
 
-  var config = require('./libs/config').init(appConfiguration).options();
+  var configOptions = require('./libs/config').init(appConfiguration).options();
 
   var app = require('./app');
 
@@ -25,7 +25,7 @@ module.exports = function Server (appConfiguration) {
    * Get port from environment and store in Express.
    */
 
-  var port = normalizePort(process.env.PORT || config.port || 80);
+  var port = normalizePort(process.env.PORT || configOptions.port || 80);
   app.set('port', port);
 
   /**
@@ -42,7 +42,7 @@ module.exports = function Server (appConfiguration) {
   server.on('listening', onListening);
 
   server.start = function (next) {
-    server.listen(port, config.interface || '0.0.0.0', next);
+    server.listen(port, configOptions.interface || '0.0.0.0', next);
   };
 
   /**

@@ -3,5 +3,6 @@
   "port": 80,
   "database": {
     "url": "sqlite://db.sqlite"
-  }
+  },
+  "adminPath": "admin"
 }

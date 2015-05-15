@@ -13,9 +13,9 @@ Database connection driver
 var Sequelize = require('sequelize');
 
 // Framework libs
-var config = require('./config').options();
+var configOptions = require('./config').options();
 
 // DB Instance
-var database = new Sequelize(config.database.url);
+var database = new Sequelize(configOptions.database.url);
 
 module.exports = database;

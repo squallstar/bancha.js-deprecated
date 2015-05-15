@@ -37,8 +37,8 @@ function Config() {
     );
 
     // Auto generates the application path when not given
-    if (!options.app_path) {
-      options.app_path = getAppPath();
+    if (!options.appPath) {
+      options.appPath = getAppPath();
     }
 
     return self;

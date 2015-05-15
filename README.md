@@ -37,6 +37,9 @@ bancha({
   },
 
   // By default, __dirname of the bootstrap script will be used
-  app_path: 'path/to/dir/'
+  appPath: 'path/to/dir/',
+
+  // Defaults to "admin".
+  adminPath: 'path/to/admin/'
 })
 ```

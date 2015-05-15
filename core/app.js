@@ -23,7 +23,7 @@ var logger = require('morgan');
 var path = require('path');
 
 // framework libs
-var config = require('./libs/config').options();
+var configOptions = require('./libs/config').options();
 var database = require('./libs/database');
 
 var app = express();
@@ -31,10 +31,13 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+
+// locals
+app.locals.options = configOptions;
 app.locals.build = Math.round(Date.now()/1000);
 
 // pretty views on local
-if(config.env === 'development') {
+if(configOptions.env === 'development') {
   app.locals.pretty = true;
   app.disable('view cache');
 }
@@ -56,7 +59,8 @@ app.use('/', require('./libs/middlewares/install'));
 app.use('/', require('./routes/index'));
 
 // admin routes
-app.use('/admin/install', require('./routes/admin/install'));
+app.use('/' + configOptions.adminPath, require('./routes/admin/index'));
+app.use('/' + path.join(configOptions.adminPath, 'install'), require('./routes/admin/install'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

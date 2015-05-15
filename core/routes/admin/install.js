@@ -5,14 +5,14 @@
 
 ---------------------------
 
-Index router
+Admin install router
 
 */
 
 var express = require('express');
 var router = express.Router();
 
-var config = require('../../libs/config').options();
+var configOptions = require('../../libs/config').options();
 var installMiddleware = require('../../libs/middlewares/install');
 
 // -------------------------------------------------------
@@ -22,8 +22,10 @@ router.post('/', showInstall);
 
 function showInstall (req, res, next) {
   if (installMiddleware.isInstalled()) {
-    return next();
+    return res.redirect('/' + configOptions.adminPath);
   }
+
+  next();
 
   var params = {
     base_url: req.body.host || ( req.protocol + '://' + req.get('host') )
@@ -35,7 +37,7 @@ function showInstall (req, res, next) {
     });
   }
 
-  res.render('install/form', {
+  res.render('admin/install/form', {
     params: params
   });
 }
@@ -45,7 +47,7 @@ function showInstall (req, res, next) {
 router.get('/complete', showInstallComplete);
 
 function showInstallComplete (req, res) {
-  res.render('install/complete');
+  res.render('admin/install/complete');
 }
 
 // -------------------------------------------------------
