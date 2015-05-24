@@ -25,8 +25,6 @@ function showInstall (req, res, next) {
     return res.redirect('/' + configOptions.adminPath);
   }
 
-  next();
-
   var params = {
     base_url: req.body.host || ( req.protocol + '://' + req.get('host') )
   };
